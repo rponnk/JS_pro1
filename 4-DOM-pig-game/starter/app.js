@@ -27,6 +27,10 @@ activePlayer = 1;
 let ui = new UI();
 ui.clearField();
 
+//buttons
+const rollDice = document.getElementById('btn-roll');
+const hold = document.getElementById('btn-hold');
+
 function nextPlayer() {
             //next player
             activePlayer === 1 ? activePlayer = 2 : activePlayer = 1;
@@ -46,7 +50,7 @@ let diceImg = document.querySelector('.dice');
 diceImg.style.display = 'none';
 
 //select roll dice
-document.getElementById('btn-roll').addEventListener('click', (e)=> {
+rollDice.addEventListener('click', (e)=> {
     // Random Number
     dice = Math.floor(Math.random() * 6) + 1;
 
@@ -72,22 +76,36 @@ document.getElementById('btn-hold').addEventListener('click', (e)=> {
    //check if player won
    let p1 = document.getElementById('score-1');
    let p2 = document.getElementById('score-2');
-    if(p1.textContent == 100) {
-        console.log('won');
-    } else if(p2.textContent == 100) {
-        console.log('p2 won');
-    } else {
-        console.log('noone');
-    }
 
+    if(p1.textContent >= 100) {
+        document.getElementById('name-1').textContent = 'WINNER!'
+        displayDice();
+    } else if(p2.textContent >= 100) {
+        document.getElementById('name-2').textContent = 'WINNER!'
+        displayDice();
+    } else {
+       console.log();
+    }
    //next
    nextPlayer();
 
 });
 
+function displayDice() {
+    diceImg.style.display = 'none';
+    hold.style.display = 'none';
+    rollDice.style.display = 'none';
+};
+
 
 //new game
 document.querySelector('.btn-new').addEventListener('click', (e)=> {
+    document.getElementById('name-1').textContent = 'Player 1'
+    document.getElementById('name-2').textContent = 'Player 2'
+    scores[1] = 0;
+    scores[2] = 0;
+    hold.style.display = 'block';
+    rollDice.style.display = 'block';
     diceImg.style.display = 'none';
     ui.clearField();
 });

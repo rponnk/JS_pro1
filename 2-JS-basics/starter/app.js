@@ -15,3 +15,9 @@ markHeight = 2;
 console.log(compare(johnHeight, johnMass));
 console.log(compare(markHeight, markMass));
 
+
+function status(busy) {
+    busy === true ? console.log('In a meeting') : console.log('avaiable');
+}
+
+status(false);

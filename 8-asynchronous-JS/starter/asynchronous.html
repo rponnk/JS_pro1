@@ -7,9 +7,78 @@
     <title>Asynchronous JavaScript</title>
 </head>
 <body>
-    <h1>Asynchronous JavaScript</h1>
+    <h1>Asynchronous JavaScript</h1>          
+            
+
+    
     <script>
-        
+        // const second = ()=> {
+        //     setTimeout(()=> {
+        //         console.log(`hey there im in the second method - 2nd`);
+        //     }, 2000);
+        // } 
+        // const first = ()=> {
+        //     console.log(`hey there! - 1st`);
+        //     second();
+        //     console.log(`the end! - 1st`);
+        // }
+
+        // first();
+
+        // function getRecipe() {
+        //     setTimeout(function(){
+        //         const recipeID = [1,2,3,4,5];
+        //         console.log(recipeID);
+
+        //         setTimeout(function(num){
+        //             num = Math.floor(Math.random() * recipeID.length);
+        //             console.log(recipeID[num]);
+        //         }, 500)
+        //     }, 2000)
+        // }
+        // getRecipe();
+
+            //Promise
+        const recipe = {title: "green", publisher: "tomatoes"};
+        const getIDs = new Promise(function(resolve, reject){
+            setTimeout(function(){
+                //call resolve means successful
+                resolve([1,2,3,4,5]);
+            }, 1500);
+        });
+
+        const getRecipe = function(recID) {
+            return new Promise(function(resolve, reject){
+                setTimeout(function(ID){
+                    resolve(`${ID}: ${recipe.title}`);
+                }, 1500, recID);
+            });
+        }
+
+        const getPub = function(pubId) {
+            return new Promise(function(resolve, reject){
+                setTimeout(function(){
+                    resolve(`${recipe.publisher}`);
+                }, 1000, pubId);
+            });
+        }
+
+        getIDs.then(function(IDs){
+            console.log(IDs);
+            return getRecipe(IDs[2])
+        })
+        .then(function(recipe){
+            console.log(recipe);
+            return getPub(recipe.publisher);
+        })
+        .then(function(recipe){
+            console.log(recipe)
+        })
+        .catch(function(error) {
+            console.log(`error`);
+        });
+
+
     </script>
 </body>
 </html>
