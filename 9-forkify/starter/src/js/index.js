@@ -1,2 +1,3 @@
 // Global app controller
-console.log('hello world');
+import x from './test'
+console.log(x);
