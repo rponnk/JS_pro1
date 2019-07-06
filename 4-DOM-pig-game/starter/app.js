@@ -16,14 +16,14 @@ class UI {
         document.getElementById('current-2').textContent = 0;
     }
 }
-let scores, roundScore, activePlayer, dice;
+let scores, roundScore, activePlayer;
 scores = [0,0,0];
 roundScore = 0;
 
 //active
 activePlayer = 1;
 
-//start all scores at 0
+//start all scores at 0 - global
 let ui = new UI();
 ui.clearField();
 
@@ -45,11 +45,11 @@ function nextPlayer() {
             diceImg.style.display = 'none';
 }
 
-//hide the image
+//hide the image - global
 let diceImg = document.querySelector('.dice');
 diceImg.style.display = 'none';
 
-//select roll dice
+//select roll dice - local
 rollDice.addEventListener('click', (e)=> {
     // Random Number
     dice = Math.floor(Math.random() * 6) + 1;
@@ -77,10 +77,10 @@ document.getElementById('btn-hold').addEventListener('click', (e)=> {
    let p1 = document.getElementById('score-1');
    let p2 = document.getElementById('score-2');
 
-    if(p1.textContent >= 100) {
+    if(p1.textContent >= 50) {
         document.getElementById('name-1').textContent = 'WINNER!'
         displayDice();
-    } else if(p2.textContent >= 100) {
+    } else if(p2.textContent >= 50) {
         document.getElementById('name-2').textContent = 'WINNER!'
         displayDice();
     } else {
